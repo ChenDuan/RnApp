@@ -8,28 +8,16 @@
  */
 
 import React, {Component} from 'react';
-import NavigationUtil from '../navigator/NavigationUtil'
 import {Platform, StyleSheet, Text, View} from 'react-native';
 
 
 
 type Props = {};
-
-export default class WelcomePage extends Component<Props> {
-  componentDidMount() {
-    this.timer = setTimeout(() => {
-      NavigationUtil.resetToHomePage({
-        navigation: this.props.navigation
-      })
-    },2000)
-  }
-  componentWillUnmount() {
-    this.timer && clearTimeout(this.timer)
-  }
+export default class FavoritePage extends Component<Props> {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>欢迎</Text>
+        <Text style={styles.welcome}>FavoritePage</Text>
       </View>
     );
   }
@@ -47,4 +35,5 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 10,
   },
+  
 });

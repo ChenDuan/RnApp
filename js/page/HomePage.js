@@ -7,33 +7,33 @@
  * @lint-ignore-every XPLATJSCOPYRIGHT1
  */
 
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import React, { Component } from "react";
+import { Platform, StyleSheet, Text, View } from "react-native";
 
+import NavigationUtil from '../navigator/NavigationUtil'
 
+import DynamicTabNav from '../navigator/DynamicTabNav'
 
 type Props = {};
 export default class HomePage extends Component<Props> {
+  
   render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>主页</Text>
-      </View>
-    );
+    NavigationUtil.navigation = this.props.navigation
+    
+    return <DynamicTabNav/>;
   }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#F5FCFF"
   },
   welcome: {
     fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  
+    textAlign: "center",
+    margin: 10
+  }
 });

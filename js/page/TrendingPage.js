@@ -8,28 +8,28 @@
  */
 
 import React, {Component} from 'react';
-import NavigationUtil from '../navigator/NavigationUtil'
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import {Platform, StyleSheet, Text, View, Button} from 'react-native';
 
 
 
 type Props = {};
-
-export default class WelcomePage extends Component<Props> {
-  componentDidMount() {
-    this.timer = setTimeout(() => {
-      NavigationUtil.resetToHomePage({
-        navigation: this.props.navigation
-      })
-    },2000)
-  }
-  componentWillUnmount() {
-    this.timer && clearTimeout(this.timer)
-  }
+export default class TrendingPage extends Component<Props> {
   render() {
+    const {navigation} = this.props
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>欢迎</Text>
+        <Text style={styles.welcome}>TrendingPage</Text>
+        <Button
+          title="改变主题色"
+          onPress={()=>{
+            navigation.setParams({
+              theme: {
+                tintColor: 'red',
+                updateTime: new Date().getTime()
+              }
+            })
+          }}
+        ></Button>
       </View>
     );
   }
@@ -47,4 +47,5 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 10,
   },
+  
 });
