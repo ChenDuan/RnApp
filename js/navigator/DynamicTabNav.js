@@ -85,7 +85,7 @@ export default class DynamicTabNav extends Component<Props> {
   }
   _tabNavigator() {
     const {PopularPage, TrendingPage, FavoritePage, MyPage} = TABS
-    const tabs = {PopularPage, TrendingPage, MyPage}
+    const tabs = {PopularPage, TrendingPage,FavoritePage, MyPage}
     return createBottomTabNavigator(tabs,{
       tabBarComponent: TabBarComponent
     })
