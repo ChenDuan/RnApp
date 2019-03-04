@@ -19,7 +19,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import Entypo from 'react-native-vector-icons/Entypo'
 import {BottomTabBar} from 'react-navigation-tabs'
 import { createBottomTabNavigator } from "react-navigation";
-
+import {connect} from 'react-redux';
 
 const TABS = {
   PopularPage: {
@@ -77,8 +77,8 @@ const TABS = {
 }
 
 
-type Props = {};
-export default class DynamicTabNav extends Component<Props> {
+
+class DynamicTabNav extends Component<Props> {
   constructor(props) {
     super(props)
     console.disableYellowBox = true
@@ -87,7 +87,9 @@ export default class DynamicTabNav extends Component<Props> {
     const {PopularPage, TrendingPage, FavoritePage, MyPage} = TABS
     const tabs = {PopularPage, TrendingPage,FavoritePage, MyPage}
     return createBottomTabNavigator(tabs,{
-      tabBarComponent: TabBarComponent
+      tabBarComponent: props => {
+        return <TabBarComponent theme={this.props.theme} {...props}/>
+      }
     })
   }
   render() {
@@ -107,34 +109,19 @@ class TabBarComponent extends React.Component {
     }
   }
   render() {
-    const {routes,index} = this.props.navigation.state
-    if(routes[index].params) {
-      const {theme} = routes[index].params
-      if(theme&&theme.updateTime>this.theme.updateTime) {
-        this.theme = theme
-      }
-    }
+    
     return (
       <BottomTabBar
         {...this.props}
-        activeTintColor = {this.theme.tintColor||this.props.activeTintColor}
+        activeTintColor = {this.props.theme}
       />
     )
   }
 }
 
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  
+const mapStateToProps = state => ({
+    theme: state.theme.theme,
 });
+
+export default connect(mapStateToProps)(DynamicTabNav);
