@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux'
 import theme from './theme'
-import {rootCom, RootNavigator} from '../navigator/AppNavigators';
+import {rootCom, RootNavigator} from '../navigator/AppNavigator';
 
 //1.指定默认state
 const navState = RootNavigator.router.getStateForAction(RootNavigator.router.getActionForPathAndParams(rootCom));
@@ -14,10 +14,7 @@ const navReducer = (state = navState, action) => {
     return nextState || state;
 };
 
-/**
- * 3.合并reducer
- * @type {Reducer<any> | Reducer<any, AnyAction>}
- */
+
 const index = combineReducers({
     nav: navReducer,
     theme: theme,
