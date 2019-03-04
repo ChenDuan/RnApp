@@ -84,16 +84,20 @@ class DynamicTabNav extends Component<Props> {
     console.disableYellowBox = true
   }
   _tabNavigator() {
+    if(this.Tabs) {
+      return this.Tabs;
+    }
+    
     const {PopularPage, TrendingPage, FavoritePage, MyPage} = TABS
     const tabs = {PopularPage, TrendingPage,FavoritePage, MyPage}
-    return createBottomTabNavigator(tabs,{
+    return this.Tabs = createBottomTabNavigator(tabs,{
       tabBarComponent: props => {
         return <TabBarComponent theme={this.props.theme} {...props}/>
       }
     })
   }
   render() {
-    NavigationUtil.navigation = this.props.navigation
+    
     const Tab = this._tabNavigator();
     return <Tab/>
   }
